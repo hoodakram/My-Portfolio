@@ -31,7 +31,7 @@ export default function SkillRing({
     const animate = () => {
       if (autoRotate && !drag.current.active && !reduced) {
         setRotation((r) => {
-          const next = r + 0.06;
+          const next = r + 0.35;
           rotationRef.current = next;
           return next;
         });
@@ -55,7 +55,7 @@ export default function SkillRing({
       if (!drag.current.active) return;
 
       const diff = e.clientX - drag.current.startX;
-      const next = drag.current.startRotation + diff * 0.18;
+      const next = drag.current.startRotation + diff * 0.40;
       rotationRef.current = next;
       setRotation(next);
     };
