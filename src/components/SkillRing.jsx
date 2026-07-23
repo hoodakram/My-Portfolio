@@ -12,6 +12,7 @@ export default function SkillRing({
   const sceneRef = useRef(null);
 
   const [rotation, setRotation] = useState(0);
+  const rotationRef = useRef(0);
 
   const drag = useRef({
     active: false,
@@ -29,7 +30,11 @@ export default function SkillRing({
 
     const animate = () => {
       if (autoRotate && !drag.current.active && !reduced) {
-        setRotation((r) => r + 0.08);
+        setRotation((r) => {
+          const next = r + 0.06;
+          rotationRef.current = next;
+          return next;
+        });
       }
       raf = requestAnimationFrame(animate);
     };
@@ -37,11 +42,12 @@ export default function SkillRing({
     animate();
 
     const scene = sceneRef.current;
+    if (!scene) return undefined;
 
     const down = (e) => {
       drag.current.active = true;
       drag.current.startX = e.clientX;
-      drag.current.startRotation = rotation;
+      drag.current.startRotation = rotationRef.current;
       scene.style.cursor = "grabbing";
     };
 
@@ -49,8 +55,9 @@ export default function SkillRing({
       if (!drag.current.active) return;
 
       const diff = e.clientX - drag.current.startX;
-
-      setRotation(drag.current.startRotation + diff * 0.2);
+      const next = drag.current.startRotation + diff * 0.18;
+      rotationRef.current = next;
+      setRotation(next);
     };
 
     const up = () => {
@@ -78,7 +85,7 @@ export default function SkillRing({
       scene.removeEventListener("mouseenter", enter);
       scene.removeEventListener("mouseleave", leave);
     };
-  }, [rotation]);
+  }, []);
 
   const angleStep = 360 / items.length;
 
