@@ -572,8 +572,9 @@ footer{ position:relative; z-index:1; border-top:1px solid var(--line); padding:
   .project-card{ min-height:auto; }
   .about-grid{ gap:40px; }
   .facts{ grid-template-columns:1fr; }
-  .timeline{ padding-left:0; }
-  .tl-item::before{ left:0; top:-2px; }
+  .timeline{ padding-left:24px; }
+  .tl-item{ padding-left:6px; }
+  .tl-item::before{ left:-18px; top:6px; width:11px; height:11px; }
   .pd-meta{ gap:20px; padding:20px 0; }
   .skills-layout{ gap:38px; }
   .contact-grid{ gap:32px; }
